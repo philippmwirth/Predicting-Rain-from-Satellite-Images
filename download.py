@@ -1,7 +1,6 @@
 import os
 import io
 import time
-import numpy as np
 import argparse
 
 from PIL import Image
@@ -42,7 +41,20 @@ REGIONS = {
 
 @dataclass
 class QueryParams:
-    """TODO
+    """Interface to convert query params into nice urls.
+
+    Examples:
+        >>> qp = QueryParams(
+        >>>     800,
+        >>>     600,
+        >>>     60,     # lat0
+        >>>     -120,    # lon0
+        >>>     30,     # lat1
+        >>>     -85,     # lon1
+        >>>     time.time(),
+        >>> )
+        >>> qp.sat_ir_108_url('https://api.meteomatics.com')
+        >>> > 'https://api.meteomatics.com/2022-02-28T13:25:05Z/sat_ir_108:K/60,-120_30,-85:800x600/png'
 
     """
     image_w: int
@@ -54,8 +66,7 @@ class QueryParams:
     timestamp: int
 
     def _to_url(self, base_url: str, type: str):
-        """TODO
-
+        """Returns the url for the given query type.
         """
         url = base_url
         url += f'/{datetime.utcfromtimestamp(self.timestamp).strftime(STRFTIME)}'
@@ -68,19 +79,19 @@ class QueryParams:
         return url.strip(' ')
 
     def sat_ir_108_url(self, base_url: str):
-        """TODO: docstring """
+        """Returns the url for query sat_ir_108:K. """
         return self._to_url(base_url, 'sat_ir_108:K')
 
     def sat_ir_062_url(self, base_url: str):
-        """TODO: docstring """
+        """Returns the url for query sat_ir_062:K. """
         return self._to_url(base_url, 'sat_ir_062:K')
 
     def lifted_index_url(self, base_url: str):
-        """TODO: docstring """
+        """Returns the url for query lifted_index:K """
         return self._to_url(base_url, 'lifted_index:K')
 
     def precip_5min_url(self, base_url: str):
-        """TODO: docstring """
+        """Returns the url for query precip_5min:mm """
         return self._to_url(base_url, 'precip_5min:mm')
 
 
