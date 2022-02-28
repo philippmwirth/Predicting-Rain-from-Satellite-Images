@@ -1,0 +1,3 @@
+[submodule "PyTorch-ENet"]
+	path = PyTorch-ENet
+	url = https://github.com/philippmwirth/PyTorch-ENet.git
