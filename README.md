@@ -13,7 +13,11 @@ This script will download a single input/output pair for each of the three prede
 
 
 ### Process Data
-TODO: Show how to pre-process data.
+To process the data, use
+```
+usage: convert.py [-h] [--mode MODE] [--data DATA] region
+```
+where `--data` is the path to the data downloaded above and `region` is one of `central_europe`, `north_america`, or `mexico`. If you want to mask out all `convective` or `stratiform` areas, use modes `stratiform` or `convective` respectively.
 
 ### Train
 To train a model on the downloaded data, use the following commands:
